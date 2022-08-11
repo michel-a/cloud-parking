@@ -1,5 +1,6 @@
 package com.malves.parking.service;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,8 +18,11 @@ public class ParkingService {
 	
 	static {
 		var id = getUUID();
+		var id1 = getUUID();
 		Parking parking = new Parking(id, "DMS-1122", "SC", "CELTA", "PRETO");
+		Parking parking1 = new Parking(id1, "WAS-1234", "SP", "VW GOL", "VERMELHO");
 		parkingMap.put(id, parking);
+		parkingMap.put(id1, parking1);
 	}
 	
 	private static String getUUID() {
@@ -27,5 +31,17 @@ public class ParkingService {
 	
 	public List<Parking> findAll() {
 		return parkingMap.values().stream().collect(Collectors.toList());
+	}
+
+	public Parking findById(String id) {
+		return parkingMap.get(id);
+	}
+
+	public Parking create(Parking parkingCreate) {
+		String uuid = getUUID();
+		parkingCreate.setId(uuid);
+		parkingCreate.setEntryDate(LocalDateTime.now());
+		parkingMap.put(uuid, parkingCreate);
+		return parkingCreate;
 	}
 }
