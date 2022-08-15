@@ -14,7 +14,7 @@ import com.malves.parking.controller.dto.ParkingCreateDTO;
 import io.restassured.RestAssured;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class ParkingControllerTest {
+public class ParkingControllerTest extends AbstractContainerBase {
 	
 	@LocalServerPort
 	private int randomPort;
@@ -55,6 +55,5 @@ public class ParkingControllerTest {
 		.body("license", Matchers.equalTo("WRT-5555"))
 		.body("color", Matchers.equalTo("AMARELO"));
 	}
-	
-	
+		
 }
